@@ -15,7 +15,7 @@ class IntroPage extends StatelessWidget {
             padding: const EdgeInsets.only(
               left: 80, right: 80, bottom: 40, top: 160
             ),
-            child: Image.asset('assets/images/avacado.jpeg'),
+            child: Image.asset('assets/images/avacado.png'),
           ),
 
           Padding(
