@@ -14,11 +14,11 @@ class HomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(context, MaterialPageRoute(
           builder: (context) {
-            return CartPage();
+            return const CartPage();
         },
         )),
         backgroundColor: Colors.white,
-        child: Icon(Icons.shopping_bag),
+        child: const Icon(Icons.shopping_bag),
       ),
       body: SafeArea(
         child: Column(
@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                 builder: (context, value, child) {
                   return GridView.builder(
                     itemCount: value.shopItems.length,
-                    padding: EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(12),
                 gridDelegate: 
                 const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,

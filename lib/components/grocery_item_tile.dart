@@ -21,7 +21,7 @@ class GroceryItemTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Container(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: color[100],
           borderRadius: BorderRadius.circular(12),
@@ -40,8 +40,8 @@ class GroceryItemTile extends StatelessWidget {
               onPressed: onPressed,
             color: color[800],
             child: Text(
-              'Rs.' + itemPrice,
-              style: TextStyle(
+              'Rs.$itemPrice',
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
