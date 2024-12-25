@@ -8,86 +8,165 @@ import 'cart_page.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+  MaterialColor _getColor(String colorName) {
+    switch (colorName.toLowerCase()) {
+      case 'red':
+        return Colors.red;
+      case 'green':
+        return Colors.green;
+      case 'blue':
+        return Colors.blue;
+      case 'yellow':
+        return Colors.yellow;
+      case 'purple':
+        return Colors.purple;
+      case 'orange':
+        return Colors.orange;
+      case 'brown':
+        return Colors.brown;
+      case 'lightgreen':
+        return Colors.lightGreen;
+      default:
+        return Colors.grey;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.push(context, MaterialPageRoute(
-          builder: (context) {
-            return const CartPage();
-        },
-        )),
-        backgroundColor: Colors.white,
-        child: const Icon(Icons.shopping_bag),
-      ),
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-
-            const SizedBox(height: 48),
-        
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.0),
-              child: Text('Hey there,'),
-            ),
-
-            const SizedBox(height: 4),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Text("Let's order fresh items for you!",
-                style:GoogleFonts.roboto(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-                ),
-            ),
-
-            const SizedBox(height: 24),
-
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.0),
-              child: Divider(),
-            ),
-
-            const SizedBox(height: 24),
-
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.0),
-              child: Text('Item List',
-              style: TextStyle(fontSize: 16),
+      backgroundColor: Colors.grey[100],
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          'Fresh Mart',
+          style: GoogleFonts.roboto(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: IconButton(
+              icon: const Icon(Icons.shopping_cart, color: Colors.black),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CartPage()),
               ),
             ),
-
-            Expanded(
-              child: Consumer<CartModel>(
-                builder: (context, value, child) {
-                  return GridView.builder(
-                    itemCount: value.shopItems.length,
-                    padding: const EdgeInsets.all(12),
-                gridDelegate: 
-                const SliverGridDelegateWithFixedCrossAxisCount(
+          ),
+        ],
+      ),
+      body: Consumer<CartModel>(builder: (context, value, child) {
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Hey there,',
+                      style: GoogleFonts.roboto(
+                        fontSize: 16,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      "Let's order fresh items!",
+                      style: GoogleFonts.roboto(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    // Search Bar
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            blurRadius: 10,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Search fresh items...',
+                          border: InputBorder.none,
+                          icon: Icon(Icons.search, color: Colors.grey[600]),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    // Categories
+                    Text(
+                      'Categories',
+                      style: GoogleFonts.roboto(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      height: 40,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          _buildCategoryChip('All', true),
+                          _buildCategoryChip('Fruits', false),
+                          _buildCategoryChip('Vegetables', false),
+                          _buildCategoryChip('Dairy', false),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                  ],
+                ),
+              ),
+              // Existing GridView
+              GridView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: value.shopItems.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 1/1.3,
-                  ), 
-                itemBuilder: (context, index) { 
-                return GroceryItemTile(
-                  itemName: value.shopItems[index][0],
-                  itemPrice: value.shopItems[index][1],
-                  imagePath: value.shopItems[index][2],
-                  color: value.shopItems[index][3],
-                  onPressed: () {
-                    Provider.of<CartModel>(context, listen: false)
-                      .addItemToCart(index);
-                  } ,
-                );
-               },
-               );
-                }
-              )
-               )
-          ],
+                  childAspectRatio: 1 / 1.2,
+                ),
+                itemBuilder: (context, index) {
+                  return GroceryItemTile(
+                    itemName: value.shopItems[index].name,
+                    itemPrice: value.shopItems[index].price,
+                    imagePath: value.shopItems[index].imagePath,
+                    color: _getColor(value.shopItems[index].color),
+                    onPressed: () => value.addItemToCart(index),
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      }),
+    );
+  }
+
+  Widget _buildCategoryChip(String label, bool isSelected) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8),
+      child: Chip(
+        label: Text(label),
+        backgroundColor: isSelected ? Colors.green : Colors.grey[200],
+        labelStyle: TextStyle(
+          color: isSelected ? Colors.white : Colors.black,
         ),
       ),
     );
