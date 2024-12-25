@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_store_app/model/cart_model.dart';
+import 'package:grocery_store_app/pages/checkout_page.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatelessWidget {
@@ -42,20 +43,34 @@ class CartPage extends StatelessWidget {
                                   color: Colors.grey[200],
                                   borderRadius: BorderRadius.circular(8)),
                               child: ListTile(
-                                  leading: Image.asset(
-                                    value.cartItems[index].imagePath,
-                                    height: 36,
-                                  ),
-                                  title: Text(value.cartItems[index].name),
-                                  subtitle: Text(
-                                      'Rs.${value.cartItems[index].price}'),
-                                  trailing: IconButton(
-                                    onPressed: () => Provider.of<CartModel>(
-                                            context,
-                                            listen: false)
-                                        .removeItemFromCart(index),
-                                    icon: const Icon(Icons.cancel),
-                                  ))),
+                                leading: Image.asset(
+                                  value.cartItems[index].imagePath,
+                                  height: 36,
+                                ),
+                                title: Text(value.cartItems[index].name),
+                                subtitle: Text(
+                                    'Rs.${value.cartItems[index].price} x ${value.cartItems[index].quantity}'),
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    IconButton(
+                                      icon: const Icon(Icons.remove),
+                                      onPressed: () => Provider.of<CartModel>(
+                                              context,
+                                              listen: false)
+                                          .decrementQuantity(index),
+                                    ),
+                                    Text('${value.cartItems[index].quantity}'),
+                                    IconButton(
+                                      icon: const Icon(Icons.add),
+                                      onPressed: () => Provider.of<CartModel>(
+                                              context,
+                                              listen: false)
+                                          .incrementQuantity(index),
+                                    ),
+                                  ],
+                                ),
+                              )),
                         );
                       })),
 
@@ -90,27 +105,30 @@ class CartPage extends StatelessWidget {
                       ),
 
                       //pay now button
-                      Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.green.shade100),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          padding: const EdgeInsets.all(12),
-                          child: const Row(
-                            children: [
-                              Text(
-                                'Pay Now',
-                                style: TextStyle(
-                                  color: Colors.white,
+                      GestureDetector(
+                        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const CheckoutPage())),
+                        child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.green.shade100),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            padding: const EdgeInsets.all(12),
+                            child: const Row(
+                              children: [
+                                Text(
+                                  'Pay Now',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                size: 16,
-                                color: Colors.white,
-                              )
-                            ],
-                          ))
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 16,
+                                  color: Colors.white,
+                                )
+                              ],
+                            )),
+                      )
                     ],
                   ),
                 ),

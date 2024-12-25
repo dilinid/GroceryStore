@@ -2,64 +2,115 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'home_page.dart';
 
-
-class IntroPage extends StatelessWidget {
+class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
+
+  @override
+  State<IntroPage> createState() => _IntroPageState();
+}
+
+class _IntroPageState extends State<IntroPage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    );
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 80, right: 80, bottom: 40, top: 160
-            ),
-            child: Image.asset('assets/images/logo.png'),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.deepPurple.shade50,
+              Colors.white,
+            ],
           ),
-
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'We deliver groceries to your doorstep',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.roboto(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
+        ),
+        child: FadeTransition(
+          opacity: _fadeAnimation,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 100, right: 100, bottom: 40, top: 120),
+                child: Image.asset('assets/images/logo.png'),
               ),
-            ),
-          ),
-
-          const SizedBox(height: 20),
-          
-          Text(
-            'Fresh Items Everyday',
-            style: TextStyle(color: Colors.grey[600]),
-          ),
-
-          const Spacer(),
-
-          GestureDetector(
-            onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-              return const HomePage();
-            })),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.deepPurple,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              padding: const EdgeInsets.all(20),
-              child: const Text(
-                'Shop Now',
-                style: TextStyle(
-                  color: Colors.white
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Text(
+                  'We deliver groceries to your doorstep',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.roboto(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    height: 1.2,
+                    color: Colors.deepPurple.shade800,
+                  ),
                 ),
-              )
-            ),
+              ),
+              const SizedBox(height: 24),
+              Text(
+                'Fresh Items Everyday',
+                style: GoogleFonts.roboto(
+                  fontSize: 16,
+                  color: Colors.grey[600],
+                  letterSpacing: 0.5,
+                ),
+              ),
+              const Spacer(),
+              GestureDetector(
+                onTap: () => Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => const HomePage())),
+                child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 24),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.deepPurple, Colors.deepPurple.shade700],
+                      ),
+                      borderRadius: BorderRadius.circular(50),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.deepPurple.withOpacity(0.3),
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20),
+                    child: Text(
+                      'Get Started',
+                      style: GoogleFonts.roboto(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1,
+                      ),
+                    )),
+              ),
+              const SizedBox(height: 50),
+            ],
           ),
-
-          const Spacer(),
-        ],
+        ),
       ),
     );
   }

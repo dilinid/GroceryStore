@@ -16,7 +16,7 @@ class CartModel extends ChangeNotifier {
       _shopItems = await _itemService.loadItems();
       notifyListeners();
     } catch (e) {
-      print('Error loading items: $e');
+      debugPrint('Error loading items: $e');
       _shopItems = [];
       notifyListeners();
     }
@@ -26,20 +26,49 @@ class CartModel extends ChangeNotifier {
   List<GroceryItem> get cartItems => _cartItems;
 
   void addItemToCart(int index) {
-    _cartItems.add(_shopItems[index]);
-    notifyListeners();
-  }
+    var item = _shopItems[index];
+    var existingIndex =
+        _cartItems.indexWhere((element) => element.name == item.name);
 
-  void removeItemFromCart(int index) {
-    _cartItems.removeAt(index);
+    if (existingIndex != -1) {
+      _cartItems[existingIndex].quantity++;
+    } else {
+      var newItem = GroceryItem(
+        name: item.name,
+        price: item.price,
+        imagePath: item.imagePath,
+        color: item.color,
+        quantity: 1,
+      );
+      _cartItems.add(newItem);
+    }
     notifyListeners();
   }
 
   String calculateTotal() {
     double totalPrice = 0;
     for (var item in _cartItems) {
-      totalPrice += double.parse(item.price);
+      totalPrice += double.parse(item.price) * item.quantity;
     }
     return totalPrice.toStringAsFixed(2);
+  }
+
+  void incrementQuantity(int index) {
+    _cartItems[index].quantity++;
+    notifyListeners();
+  }
+
+  void decrementQuantity(int index) {
+    if (_cartItems[index].quantity > 1) {
+      _cartItems[index].quantity--;
+    } else {
+      _cartItems.removeAt(index);
+    }
+    notifyListeners();
+  }
+
+  void clearCart() {
+    _cartItems.clear();
+    notifyListeners();
   }
 }
