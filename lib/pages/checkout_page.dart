@@ -17,23 +17,37 @@ class _CheckoutPageState extends State<CheckoutPage> {
   final _phoneController = TextEditingController();
   final _addressController = TextEditingController();
   String _selectedPayment = 'Cash on Delivery';
+  final _cardNumberController = TextEditingController();
+  final _cardExpiryController = TextEditingController();
+  final _cardCvvController = TextEditingController();
+  final _cardHolderController = TextEditingController();
 
   @override
   void dispose() {
     _nameController.dispose();
     _phoneController.dispose();
     _addressController.dispose();
+    _cardNumberController.dispose();
+    _cardExpiryController.dispose();
+    _cardCvvController.dispose();
+    _cardHolderController.dispose();
     super.dispose();
   }
 
   void _showOrderConfirmation(BuildContext context) {
+    if (_selectedPayment == 'Card' && !_formKey.currentState!.validate()) {
+      return;
+    }
+
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Order Placed Successfully!'),
-          content: const Text('Thank you for your order.'),
+          content: Text(
+            'Thank you for your order.\nPayment Method: $_selectedPayment',
+          ),
           actions: [
             TextButton(
               onPressed: () {
@@ -49,6 +63,34 @@ class _CheckoutPageState extends State<CheckoutPage> {
         );
       },
     );
+  }
+
+// Add this method to format card number
+  String _formatCardNumber(String input) {
+    final numbersOnly = input.replaceAll(RegExp(r'[^\d]'), '');
+    final groups = RegExp(r'.{1,4}').allMatches(numbersOnly);
+    return groups.map((match) => match.group(0)).join(' ');
+  }
+
+// Add this method to validate card number
+  bool _validateCardNumber(String number) {
+    if (number.isEmpty) return false;
+    number = number.replaceAll(RegExp(r'\s+\b|\b\s'), '');
+    if (number.length < 16) return false;
+
+    int sum = 0;
+    bool isEven = false;
+
+    for (var i = number.length - 1; i >= 0; i--) {
+      var digit = int.parse(number[i]);
+      if (isEven) {
+        digit *= 2;
+        if (digit > 9) digit -= 9;
+      }
+      sum += digit;
+      isEven = !isEven;
+    }
+    return sum % 10 == 0;
   }
 
   @override
@@ -90,7 +132,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                             (item) => Padding(
                               padding: const EdgeInsets.only(bottom: 8.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text('${item.name} x${item.quantity}'),
                                   Text(
@@ -107,7 +150,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               const Text('Total'),
                               Text(
                                 'Rs.${cartModel.calculateTotal()}',
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -186,11 +230,154 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     leading: Radio(
                       value: 'Cash on Delivery',
                       groupValue: _selectedPayment,
-                      onChanged: (value) {
-                        setState(() => _selectedPayment = value.toString());
-                      },
+                      onChanged: (value) =>
+                          setState(() => _selectedPayment = value.toString()),
                     ),
                   ),
+                  ListTile(
+                    title: const Text('Credit/Debit Card'),
+                    leading: Radio(
+                      value: 'Card',
+                      groupValue: _selectedPayment,
+                      onChanged: (value) =>
+                          setState(() => _selectedPayment = value.toString()),
+                    ),
+                  ),
+                  if (_selectedPayment == 'Card')
+                    Card(
+                      elevation: 4,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextFormField(
+                              controller: _cardNumberController,
+                              decoration: InputDecoration(
+                                labelText: 'Card Number',
+                                prefixIcon: const Icon(Icons.credit_card),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              keyboardType: TextInputType.number,
+                              maxLength: 19,
+                              onChanged: (value) {
+                                final formatted = _formatCardNumber(value);
+                                if (formatted != value) {
+                                  _cardNumberController.value =
+                                      TextEditingValue(
+                                    text: formatted,
+                                    selection: TextSelection.collapsed(
+                                        offset: formatted.length),
+                                  );
+                                }
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter card number';
+                                }
+                                if (!_validateCardNumber(value)) {
+                                  return 'Invalid card number';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 16),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: TextFormField(
+                                    controller: _cardExpiryController,
+                                    decoration: InputDecoration(
+                                      labelText: 'MM/YY',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                    ),
+                                    keyboardType: TextInputType.number,
+                                    maxLength: 5,
+                                    onChanged: (value) {
+                                      if (value.length == 2 &&
+                                          !value.contains('/')) {
+                                        _cardExpiryController.text = '$value/';
+                                        _cardExpiryController.selection =
+                                            TextSelection.fromPosition(
+                                          TextPosition(
+                                              offset: _cardExpiryController
+                                                  .text.length),
+                                        );
+                                      }
+                                    },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Required';
+                                      }
+                                      final parts = value.split('/');
+                                      if (parts.length != 2)
+                                        return 'Invalid format';
+
+                                      try {
+                                        final month = int.parse(parts[0]);
+                                        final year = int.parse(parts[1]);
+                                        if (month < 1 || month > 12)
+                                          return 'Invalid month';
+                                        if (year < 23 || year > 99)
+                                          return 'Invalid year';
+                                      } catch (e) {
+                                        return 'Invalid format';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: TextFormField(
+                                    controller: _cardCvvController,
+                                    decoration: InputDecoration(
+                                      labelText: 'CVV',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                    ),
+                                    keyboardType: TextInputType.number,
+                                    maxLength: 3,
+                                    obscureText: true,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Required';
+                                      }
+                                      if (value.length != 3) {
+                                        return 'Invalid CVV';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 16),
+                            TextFormField(
+                              controller: _cardHolderController,
+                              decoration: InputDecoration(
+                                labelText: 'Card Holder Name',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              textCapitalization: TextCapitalization.characters,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter card holder name';
+                                }
+                                return null;
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
 
                   const SizedBox(height: 24),
 
