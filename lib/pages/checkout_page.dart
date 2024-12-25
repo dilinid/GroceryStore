@@ -314,16 +314,19 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                         return 'Required';
                                       }
                                       final parts = value.split('/');
-                                      if (parts.length != 2)
+                                      if (parts.length != 2) {
                                         return 'Invalid format';
+                                      }
 
                                       try {
                                         final month = int.parse(parts[0]);
                                         final year = int.parse(parts[1]);
-                                        if (month < 1 || month > 12)
+                                        if (month < 1 || month > 12) {
                                           return 'Invalid month';
-                                        if (year < 23 || year > 99)
+                                        }
+                                        if (year < 23 || year > 99) {
                                           return 'Invalid year';
+                                        }
                                       } catch (e) {
                                         return 'Invalid format';
                                       }

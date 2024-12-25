@@ -5,9 +5,9 @@ class GroceryItemTile extends StatelessWidget {
   final String itemPrice;
   final String imagePath;
   final color;
-  void Function()? onPressed;
+  final void Function()? onPressed;
 
-  GroceryItemTile({
+  const GroceryItemTile({
     super.key,
     required this.itemName,
     required this.itemPrice,
