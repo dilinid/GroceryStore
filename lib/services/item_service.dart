@@ -4,13 +4,17 @@ import '../model/item_model.dart';
 
 class ItemService {
   Future<List<GroceryItem>> loadItems() async {
-    final String response = await rootBundle.loadString('assets/data/shop_items.json');
-    final data = await json.decode(response);
-    
-    List<GroceryItem> items = [];
-    for (var item in data['items']) {
-      items.add(GroceryItem.fromJson(item));
+    try {
+      // Load JSON from the assets directory
+      final String response = await rootBundle.loadString('assets/data/shop_items.json');
+      final data = json.decode(response) as Map<String, dynamic>;
+      
+      // Parse the JSON into a list of GroceryItems
+      return (data['items'] as List)
+          .map((item) => GroceryItem.fromJson(item))
+          .toList();
+    } catch (e) {
+      throw Exception('Failed to load items: $e');
     }
-    return items;
   }
 }

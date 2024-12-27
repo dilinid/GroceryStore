@@ -14,6 +14,9 @@ class CartModel extends ChangeNotifier {
   Future<void> _loadItems() async {
     try {
       _shopItems = await _itemService.loadItems();
+      for (var item in _shopItems) {
+        print('Loaded Item: ${item.name}, Category: ${item.category}');
+      }
       notifyListeners();
     } catch (e) {
       debugPrint('Error loading items: $e');
@@ -33,14 +36,14 @@ class CartModel extends ChangeNotifier {
     if (existingIndex != -1) {
       _cartItems[existingIndex].quantity++;
     } else {
-      var newItem = GroceryItem(
+      _cartItems.add(GroceryItem(
         name: item.name,
         price: item.price,
         imagePath: item.imagePath,
         color: item.color,
+        category: item.category,
         quantity: 1,
-      );
-      _cartItems.add(newItem);
+      ));
     }
     notifyListeners();
   }
@@ -48,7 +51,7 @@ class CartModel extends ChangeNotifier {
   String calculateTotal() {
     double totalPrice = 0;
     for (var item in _cartItems) {
-      totalPrice += double.parse(item.price) * item.quantity;
+      totalPrice += item.price * item.quantity;
     }
     return totalPrice.toStringAsFixed(2);
   }
