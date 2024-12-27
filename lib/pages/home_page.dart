@@ -30,6 +30,8 @@ class HomePage extends StatelessWidget {
         return Colors.lightBlue;
       case 'amber':
         return Colors.amber;
+      case 'pink':
+        return Colors.pink;
       default:
         return Colors.grey;
     }
