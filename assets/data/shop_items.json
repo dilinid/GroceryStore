@@ -1,0 +1,76 @@
+{
+    "items": [
+      {
+        "name": "Banana",
+        "price": "110.00",
+        "image": "assets/images/banana.png",
+        "color": "yellow"
+      },
+      {
+        "name": "Avocado",
+        "price": "60.00", 
+        "image": "assets/images/avocado.png",
+        "color": "green"
+      },
+      {
+        "name": "Apple",
+        "price": "50.00",
+        "image": "assets/images/apple.png",
+        "color": "red"
+      },
+      {
+        "name": "Pineapple",
+        "price": "150.00",
+        "image": "assets/images/pineapple.png",
+        "color": "yellow"
+      },
+      {
+        "name": "Guava",
+        "price": "140.00",
+        "image": "assets/images/guava.png",
+        "color": "lightGreen"
+      },
+      {
+        "name": "Carrot",
+        "price": "50.00",
+        "image": "assets/images/carrot.png",
+        "color": "orange"
+      },
+      {
+        "name": "Cabbage",
+        "price": "90.00",
+        "image": "assets/images/cabbage.png",
+        "color": "green"
+      },
+      {
+        "name": "Eggplant",
+        "price": "60.00",
+        "image": "assets/images/eggplant.png",
+        "color": "purple"
+      },
+      {
+        "name": "Green Beans",
+        "price": "110.00",
+        "image": "assets/images/greenbeans.png",
+        "color": "green"
+      },
+      {
+        "name": "Chicken",
+        "price": "960.00",
+        "image": "assets/images/chicken.png",
+        "color": "red"
+      },
+      {
+        "name": "Bread",
+        "price": "140.00",
+        "image": "assets/images/bread.png",
+        "color": "brown"
+      },
+      {
+        "name": "Water",
+        "price": "90.00",
+        "image": "assets/images/water.png",
+        "color": "blue"
+      }
+    ]
+  }
