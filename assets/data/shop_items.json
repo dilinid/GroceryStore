@@ -19,34 +19,35 @@
         "color": "red"
       },
       {
-        "name": "Pineapple",
-        "price": "150.00",
-        "image": "assets/images/pineapple.png",
-        "color": "yellow"
-      },
-      {
         "name": "Guava",
         "price": "140.00",
         "image": "assets/images/guava.png",
         "color": "lightGreen"
       },
       {
+        "name": "Pineapple",
+        "price": "150.00",
+        "image": "assets/images/pineapple.png",
+        "color": "yellow"
+      },
+      
+      {
         "name": "Carrot",
         "price": "50.00",
         "image": "assets/images/carrot.png",
         "color": "orange"
+      },  
+      {
+        "name": "Eggplant",
+        "price": "60.00",
+        "image": "assets/images/eggplant.png",
+        "color": "purple"
       },
       {
         "name": "Cabbage",
         "price": "90.00",
         "image": "assets/images/cabbage.png",
         "color": "green"
-      },
-      {
-        "name": "Eggplant",
-        "price": "60.00",
-        "image": "assets/images/eggplant.png",
-        "color": "purple"
       },
       {
         "name": "Green Beans",
@@ -71,6 +72,30 @@
         "price": "90.00",
         "image": "assets/images/water.png",
         "color": "blue"
+      },
+      {
+        "name": "Milk",
+        "price": "60.00",
+        "image": "assets/images/milk.png",
+        "color": "lightblue"
+      },
+      {
+        "name": "Cheese",
+        "price": "120.00",
+        "image": "assets/images/cheese.png",
+        "color": "yellow"
+      },
+      {
+        "name": "Ice Cream",
+        "price": "100.00",
+        "image": "assets/images/icecream.png",
+        "color": "amber"
+      },
+      {
+        "name": "Yogurt",
+        "price": "80.00",
+        "image": "assets/images/yogurt.png",
+        "color": "lightblue"
       }
     ]
   }

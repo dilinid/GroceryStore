@@ -105,29 +105,32 @@ class CartPage extends StatelessWidget {
                       ),
 
                       //pay now button
-                      GestureDetector(
-                        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const CheckoutPage())),
-                        child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.green.shade100),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            padding: const EdgeInsets.all(12),
-                            child: const Row(
-                              children: [
-                                Text(
-                                  'Pay Now',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                      MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const CheckoutPage())),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.green.shade100),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              padding: const EdgeInsets.all(12),
+                              child: const Row(
+                                children: [
+                                  Text(
+                                    'Pay Now',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 16,
-                                  color: Colors.white,
-                                )
-                              ],
-                            )),
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 16,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              )),
+                        ),
                       )
                     ],
                   ),

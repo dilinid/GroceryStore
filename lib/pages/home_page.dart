@@ -26,6 +26,10 @@ class HomePage extends StatelessWidget {
         return Colors.brown;
       case 'lightgreen':
         return Colors.lightGreen;
+      case 'lightblue':
+        return Colors.lightBlue;
+      case 'amber':
+        return Colors.amber;
       default:
         return Colors.grey;
     }
@@ -69,21 +73,23 @@ class HomePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Hey there,',
+                      'Hey!',
                       style: GoogleFonts.roboto(
-                        fontSize: 16,
+                        fontSize: 18,
                         color: Colors.grey[600],
                       ),
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      "Let's order fresh items!",
+                      "Ready to  fill up your Green Basket?",
                       style: GoogleFonts.roboto(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
+                        color: Colors.green,
                       ),
                     ),
                     const SizedBox(height: 24),
+
                     // Search Bar
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -107,6 +113,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 24),
+
                     // Categories
                     Text(
                       'Categories',
@@ -132,7 +139,8 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              // Existing GridView
+
+              // Item GridView
               GridView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 physics: const NeverScrollableScrollPhysics(),

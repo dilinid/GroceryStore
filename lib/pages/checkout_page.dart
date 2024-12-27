@@ -97,22 +97,19 @@ class _CheckoutPageState extends State<CheckoutPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Checkout',
-          style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
-        ),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: Consumer<CartModel>(
         builder: (context, cartModel, child) {
           return SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(8.0),
             child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  
                   // Order Summary
                   Card(
                     child: Padding(
@@ -193,12 +190,16 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     ),
                     keyboardType: TextInputType.phone,
                     validator: (value) {
-                      if (value?.isEmpty ?? true) {
+                      if (value == null || value.isEmpty) {
                         return 'Please enter your phone number';
+                      }
+                      if (!RegExp(r'^\d{10}$').hasMatch(value)) {
+                        return 'Please enter a valid phone number';
                       }
                       return null;
                     },
                   ),
+
                   const SizedBox(height: 16),
                   TextFormField(
                     controller: _addressController,

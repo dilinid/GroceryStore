@@ -57,7 +57,7 @@ class _IntroPageState extends State<IntroPage>
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Text(
-                  'We deliver groceries to your doorstep',
+                  'We Deliver Groceries To Your Doorstep',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.roboto(
                     fontSize: 32,
@@ -71,41 +71,44 @@ class _IntroPageState extends State<IntroPage>
               Text(
                 'Fresh Items Everyday',
                 style: GoogleFonts.roboto(
-                  fontSize: 16,
+                  fontSize: 18,
                   color: Colors.grey[600],
                   letterSpacing: 0.5,
                 ),
               ),
               const Spacer(),
-              GestureDetector(
-                onTap: () => Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => const HomePage())),
-                child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 24),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Colors.deepPurple, Colors.deepPurple.shade700],
-                      ),
-                      borderRadius: BorderRadius.circular(50),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.deepPurple.withOpacity(0.3),
-                          blurRadius: 8,
-                          offset: const Offset(0, 4),
+              MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () => Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => const HomePage())),
+                  child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 24),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Colors.deepPurple, Colors.deepPurple.shade700],
                         ),
-                      ],
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 20),
-                    child: Text(
-                      'Get Started',
-                      style: GoogleFonts.roboto(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1,
+                        borderRadius: BorderRadius.circular(50),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.deepPurple.withOpacity(0.3),
+                            blurRadius: 8,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
                       ),
-                    )),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20),
+                      child: Text(
+                        'Shop Now',
+                        style: GoogleFonts.roboto(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1,
+                        ),
+                      )),
+                ),
               ),
               const SizedBox(height: 50),
             ],
