@@ -165,9 +165,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your phone number';
                       }
-                      if (!RegExp(r'^\d{10}$').hasMatch(value)) {
-                        return 'Please enter a valid phone number';
-                      }
+                      
                       return null;
                     },
                   ),
@@ -215,6 +213,81 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           setState(() => _selectedPayment = value.toString()),
                     ),
                   ),
+
+                  if (_selectedPayment == 'Card') ...[
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: _cardNumberController,
+                      decoration: const InputDecoration(
+                        labelText: 'Card Number',
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your card number';
+                        }
+                        
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            controller: _cardExpiryController,
+                            decoration: const InputDecoration(
+                              labelText: 'Expiry Date (MM/YY)',
+                              border: OutlineInputBorder(),
+                            ),
+                            keyboardType: TextInputType.datetime,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Enter expiry date';
+                              }
+                              
+                              return null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: TextFormField(
+                            controller: _cardCvvController,
+                            decoration: const InputDecoration(
+                              labelText: 'CVV',
+                              border: OutlineInputBorder(),
+                            ),
+                            keyboardType: TextInputType.number,
+                            obscureText: true,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Enter CVV';
+                              }
+                              
+                              return null;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: _cardHolderController,
+                      decoration: const InputDecoration(
+                        labelText: 'Cardholder Name',
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return 'Enter cardholder name';
+                        }
+                        return null;
+                      },
+                    ),
+                  ],
+
                   const SizedBox(height: 24),
 
                   // Place Order Button
