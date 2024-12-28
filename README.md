@@ -1,16 +1,17 @@
-# grocery_store_app
+# Grocery Store App
 
-A new Flutter project.
+A simple Flutter application for managing grocery shopping with an engaging UI.
 
-## Getting Started
+## Features
+- **Intro Page**: Welcomes users to the app.
+- **Home Page**: Displays grocery items in a grid format with their name, price, and image.
+- **Cart Page**: Allows users to review items added to their cart.
+- **Checkout Page**: Collects customer details, validates inputs, and confirms the order with a success dialog box.
 
-This project is a starting point for a Flutter application.
+## Installation
+1. Clone the repository.
+2. Run flutter pub get.
+3. Launch the app using flutter run.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Developed with Flutter.
