@@ -1,101 +1,116 @@
 {
-    "items": [
-      {
-        "name": "Banana",
-        "price": "110.00",
-        "image": "assets/images/banana.png",
-        "color": "yellow"
-      },
-      {
-        "name": "Avocado",
-        "price": "75.00", 
-        "image": "assets/images/avocado.png",
-        "color": "green"
-      },
-      {
-        "name": "Apple",
-        "price": "65.00",
-        "image": "assets/images/apple.png",
-        "color": "red"
-      },
-      {
-        "name": "Guava",
-        "price": "120.00",
-        "image": "assets/images/guava.png",
-        "color": "lightGreen"
-      },
-      {
-        "name": "Pineapple",
-        "price": "230.00",
-        "image": "assets/images/pineapple.png",
-        "color": "yellow"
-      },
-      
-      {
-        "name": "Carrot",
-        "price": "220.00",
-        "image": "assets/images/carrot.png",
-        "color": "orange"
-      },  
-      {
-        "name": "Eggplant",
-        "price": "80.00",
-        "image": "assets/images/eggplant.png",
-        "color": "purple"
-      },
-      {
-        "name": "Cabbage",
-        "price": "90.00",
-        "image": "assets/images/cabbage.png",
-        "color": "green"
-      },
-      {
-        "name": "Green Beans",
-        "price": "110.00",
-        "image": "assets/images/greenbeans.png",
-        "color": "green"
-      },
-      {
-        "name": "Chicken",
-        "price": "960.00",
-        "image": "assets/images/chicken.png",
-        "color": "red"
-      },
-      {
-        "name": "Bread",
-        "price": "140.00",
-        "image": "assets/images/bread.png",
-        "color": "brown"
-      },
-      {
-        "name": "Water",
-        "price": "90.00",
-        "image": "assets/images/water.png",
-        "color": "blue"
-      },
-      {
-        "name": "Milk",
-        "price": "140.00",
-        "image": "assets/images/milk.png",
-        "color": "pink"
-      },
-      {
-        "name": "Cheese",
-        "price": "560.00",
-        "image": "assets/images/cheese.png",
-        "color": "yellow"
-      },
-      {
-        "name": "Ice Cream",
-        "price": "650.00",
-        "image": "assets/images/icecream.png",
-        "color": "amber"
-      },
-      {
-        "name": "Yogurt",
-        "price": "80.00",
-        "image": "assets/images/yogurt.png",
-        "color": "lightblue"
-      }
-    ]
-  }
+  "items": [
+    {
+      "name": "Banana",
+      "price": "110.00",
+      "image": "assets/images/banana.png",
+      "color": "yellow",
+      "category": "Fruits"
+    },
+    {
+      "name": "Avocado",
+      "price": "75.00",
+      "image": "assets/images/avocado.png",
+      "color": "green",
+      "category": "Fruits"
+    },
+    {
+      "name": "Apple",
+      "price": "65.00",
+      "image": "assets/images/apple.png",
+      "color": "red",
+      "category": "Fruits"
+    },
+    {
+      "name": "Guava",
+      "price": "120.00",
+      "image": "assets/images/guava.png",
+      "color": "lightGreen",
+      "category": "Fruits"
+    },
+    {
+      "name": "Pineapple",
+      "price": "230.00",
+      "image": "assets/images/pineapple.png",
+      "color": "yellow",
+      "category": "Fruits"
+    },
+    {
+      "name": "Carrot",
+      "price": "220.00",
+      "image": "assets/images/carrot.png",
+      "color": "orange",
+      "category": "Vegetables"
+    },
+    {
+      "name": "Eggplant",
+      "price": "80.00",
+      "image": "assets/images/eggplant.png",
+      "color": "purple",
+      "category": "Vegetables"
+    },
+    {
+      "name": "Cabbage",
+      "price": "90.00",
+      "image": "assets/images/cabbage.png",
+      "color": "green",
+      "category": "Vegetables"
+    },
+    {
+      "name": "Green Beans",
+      "price": "110.00",
+      "image": "assets/images/greenbeans.png",
+      "color": "green",
+      "category": "Vegetables"
+    },
+    {
+      "name": "Chicken",
+      "price": "960.00",
+      "image": "assets/images/chicken.png",
+      "color": "red",
+      "category": "Meat"
+    },
+    {
+      "name": "Bread",
+      "price": "140.00",
+      "image": "assets/images/bread.png",
+      "color": "brown",
+      "category": "Bakery"
+    },
+    {
+      "name": "Water",
+      "price": "90.00",
+      "image": "assets/images/water.png",
+      "color": "blue",
+      "category": "Drinks"
+    },
+    {
+      "name": "Milk",
+      "price": "140.00",
+      "image": "assets/images/milk.png",
+      "color": "pink",
+      "category": "Dairy"
+    },
+    {
+      "name": "Cheese",
+      "price": "560.00",
+      "image": "assets/images/cheese.png",
+      "color": "yellow",
+      "category": "Dairy"
+    },
+    {
+      "name": "Ice Cream",
+      "price": "650.00",
+      "image": "assets/images/icecream.png",
+      "color": "amber",
+      "category": "Desserts"
+    },
+    {
+      "name": "Yogurt",
+      "price": "80.00",
+      "image": "assets/images/yogurt.png",
+      "color": "lightblue",
+      "category": "Dairy"
+    }
+  ]
+}
