@@ -1,4 +1,4 @@
 {
   "java.compile.nullAnalysis.mode": "automatic",
-  "cmake.sourceDirectory": "D:/Flutter/GroceryStore/windows/runner"
+  "cmake.sourceDirectory": "D:/GitHub Repo Clone/GroceryStore/windows"
 }

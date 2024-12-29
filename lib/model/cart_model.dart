@@ -28,6 +28,14 @@ class CartModel extends ChangeNotifier {
   List<GroceryItem> get shopItems => _shopItems;
   List<GroceryItem> get cartItems => _cartItems;
 
+  int getTotalItemCount() {
+    int total = 0;
+    for (var item in _cartItems) {
+      total += item.quantity;
+    }
+    return total;
+  }
+
   void addItemToCart(int index) {
     var item = _shopItems[index];
     var existingIndex =
