@@ -19,7 +19,7 @@ class GroceryItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: color.withOpacity(0.2),
+      color: color.withOpacity(0.5),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
