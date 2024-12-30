@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String _searchQuery = '';
+  String searchQuery = '';
   String _selectedCategory = 'All';
 
   @override
@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             title: const Text(
-              '🛒 Grocery Store',
+              '🛒 Green Basket',
               style: TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.bold,
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                   height: 50,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(24),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.1),
@@ -138,8 +138,8 @@ class _HomePageState extends State<HomePage> {
             final selectedCategory = _selectedCategory.trim().toLowerCase();
             final matchesCategory =
                 selectedCategory == 'all' || itemCategory == selectedCategory;
-            final matchesSearchQuery = _searchQuery.isEmpty ||
-                item.name.toLowerCase().contains(_searchQuery.toLowerCase());
+            final matchesSearchQuery = searchQuery.isEmpty ||
+                item.name.toLowerCase().contains(searchQuery.toLowerCase());
             return matchesCategory && matchesSearchQuery;
           }).toList();
 

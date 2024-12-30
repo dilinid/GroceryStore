@@ -15,7 +15,7 @@ class CartModel extends ChangeNotifier {
     try {
       _shopItems = await _itemService.loadItems();
       for (var item in _shopItems) {
-        print('Loaded Item: ${item.name}, Category: ${item.category}');
+        debugPrint('Loaded Item: ${item.name}, Category: ${item.category}');
       }
       notifyListeners();
     } catch (e) {
