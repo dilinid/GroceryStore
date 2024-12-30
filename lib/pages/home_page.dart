@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String searchQuery = '';
+  String _searchQuery = '';
   String _selectedCategory = 'All';
 
   @override
@@ -124,6 +124,11 @@ class _HomePageState extends State<HomePage> {
                         vertical: 12,
                       ),
                     ),
+                    onChanged: (value) {
+                      setState(() {
+                        _searchQuery = value;
+                      });
+                    },
                   ),
                 ),
               ),
@@ -138,8 +143,8 @@ class _HomePageState extends State<HomePage> {
             final selectedCategory = _selectedCategory.trim().toLowerCase();
             final matchesCategory =
                 selectedCategory == 'all' || itemCategory == selectedCategory;
-            final matchesSearchQuery = searchQuery.isEmpty ||
-                item.name.toLowerCase().contains(searchQuery.toLowerCase());
+            final matchesSearchQuery = _searchQuery.isEmpty ||
+                item.name.toLowerCase().contains(_searchQuery.toLowerCase());
             return matchesCategory && matchesSearchQuery;
           }).toList();
 
